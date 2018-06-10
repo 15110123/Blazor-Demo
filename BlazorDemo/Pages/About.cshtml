@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Blazor
+@using Microsoft.AspNetCore.Blazor.Services
+@page "/about"
+@inject IUriHelper UriHelper
+
+<AboutHelloWorld />
+
+<link rel="stylesheet" href="css/about.css"/>
+
+<h1>Demo 1</h1>
+
+<p>
+    Điều hướng bằng UriHelper.NavigateTo (không load lại toàn bộ trang).
+    Nhập tên vào textbox phía dưới rồi bấm nút gửi nhé.
+</p>
+
+<input type="text" name="name" onchange=@NameChanged />
+<button onclick=@BtnSendClick>Gửi</button>
+
+<div style="height: 30px"></div>
+<h1>Demo 2</h1>
+
+<p>
+    Điều hướng bằng form request. Hạn chế điều hướng bằng form request, vì phải load lại toàn bộ trang. Ta có thể thay thế GET form bằng cách gọi NavigateTo và truyền url có query string "?..." vào. 
+</p>
+
+<form method="get" action="/myname">
+    <label>Xin hãy nhập họ tên: </label>
+    <input type="text" name="name">
+    <input type="submit" value="Xong!" />
+</form>
+
+<h1>Demo 3</h1>
+<label>Nhập mã màu (ví dụ: #000) để thấy điều kỳ diệu</label><br />
+<input type="text" id="color" onkeyup=@ColorKeyUp />
+<div style="background-color: @_color; height: 30px" />
+
+<h1>Demo 4</h1>
+Hai checkbox đồng bộ theo kiểu bind
+<input type="checkbox" bind=@_checkboxstatus />
+<input type="checkbox" bind=@_checkboxstatus />
+
+<h1>Demo 5</h1>
+Hai checkbox đồng bộ theo kiểu value/checked/... + onchange
+<input type="checkbox" checked=@_checkboxstatus onchange=@((UIChangeEventArgs e) => _checkboxstatus = (bool) e.Value) />
+<input type="checkbox" checked=@_checkboxstatus onchange=@((UIChangeEventArgs e) => _checkboxstatus = (bool) e.Value) />
+
+@functions
+{
+
+private string _name;
+private string _color = "#fff";
+private bool _checkboxstatus = true;
+
+private void NameChanged(UIChangeEventArgs e)
+{
+    _name = e.Value as string;
+}
+
+private void BtnSendClick()
+{
+    UriHelper.NavigateTo($"/myname/{_name}");
+}
+
+private void ColorKeyUp(UIKeyboardEventArgs e)
+{
+    _color = RegisteredFunction.Invoke<string>("GetDOMValue", "color");
+}
+}

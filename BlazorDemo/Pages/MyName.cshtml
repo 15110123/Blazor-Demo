@@ -1,0 +1,24 @@
+﻿@using System.Web
+@using Microsoft.AspNetCore.Blazor.Components
+@using Microsoft.AspNetCore.Blazor.Services
+@page "/myname/{Name}"
+@page "/myname"
+@inject IUriHelper UriHelper
+
+<h1>Đã nhận được thông tin! Tên bạn là @Name</h1>
+
+@functions
+{
+    [Parameter]
+    private string Name { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        var curUri = UriHelper.GetAbsoluteUri();
+        var queryString = new Uri(curUri).Query;
+        var queryDict = HttpUtility.ParseQueryString(queryString);
+        if (string.IsNullOrEmpty(queryDict["name"])) return;
+        Name = queryDict["name"];
+    }
+}
+

@@ -1,0 +1,17 @@
+﻿@page "/"
+
+<h1>Demo hướng dẫn Blazor!</h1>
+
+@*
+    Các bạn cần đặt tên component khác nhau để Blazor không bị nhầm lẫn.
+*@
+
+@*
+    Các component có parameter nhưng khi gọi lại không khai báo giá trị thì sẽ null hoặc giá trị mặc định. Blazor không báo lỗi null như React Js.
+*@
+<HomeHelloWorld />
+
+@*
+    Component có parameter là Name, gán Name là "you".
+*@
+<HomeHelloWorld Name="you" />

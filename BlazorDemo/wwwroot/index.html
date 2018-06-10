@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>BlazorDemo</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        function blazorBoot()
+        {
+            Blazor.registerFunction('GetDOMValue', function(id) {
+                return $("#" + id)[0].value;
+            });
+        }
+    </script>
+</head>
+<body onload="blazorBoot()">
+    <app>Đang tải...</app>
+   
+
+<script type="blazor-boot"></script>
+</body>
+</html>

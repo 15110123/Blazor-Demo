@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>BlazorDemo</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        function blazorBoot()
+        {
+            Blazor.registerFunction('GetDOMValue', function(id) {
+                return $("#" + id)[0].value;
+            });
+        }
+    </script>
+</head>
+<body onload="blazorBoot()">
+    <app>Đang tải...</app>
+   
+
+<script src="_framework/blazor.js" main="BlazorDemo.dll" entrypoint="BlazorDemo.Program::Main" references="Microsoft.AspNetCore.Blazor.Browser.dll,Microsoft.AspNetCore.Blazor.dll,Microsoft.Extensions.DependencyInjection.Abstractions.dll,Microsoft.Extensions.DependencyInjection.dll,mscorlib.dll,netstandard.dll,System.Core.dll,System.dll,System.Net.Http.dll,System.Web.Services.dll" linker-enabled="true"></script>
+</body>
+</html>

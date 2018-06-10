@@ -1,0 +1,16 @@
+﻿@implements IDisposable
+
+<h1>Hello @Name from home</h1>
+
+@functions
+{
+    //Parameter luôn là property
+    [Parameter]
+    private string Name { get; set; }
+
+    public void Dispose()
+    {
+        Console.WriteLine("Đã dispose");
+    }
+
+}
